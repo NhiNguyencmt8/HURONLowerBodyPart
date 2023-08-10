@@ -5,6 +5,7 @@ from Joint import JointTypes
 from HURONJoint import HURONJoint
 from TorqueMotor import TorqueMotor
 from HURONEncoder import HURONEncoder
+from SimpleTorqueController import SimpleTorqueController
 import time
 import math
 
@@ -71,70 +72,58 @@ if __name__ == '__main__':
 
     # Calibrate ODrives
     print("Calibrating...")
-    left_hip_pitch_od.calibrate()
-    right_hip_pitch_od.calibrate()
-    time.sleep(25)
+    # left_hip_pitch_od.calibrate()
+    # right_hip_pitch_od.calibrate()
+    # time.sleep(25)
     right_knee_pitch_od.calibrate()
-    left_knee_pitch_od.calibrate()
+    # left_knee_pitch_od.calibrate()
     time.sleep(25)
 
     print("Setting up...")
-    left_hip_pitch_od.set_up()
-    left_knee_pitch_od.set_up()
-    right_hip_pitch_od.set_up()
+    # left_hip_pitch_od.set_up()
+    # left_knee_pitch_od.set_up()
+    # right_hip_pitch_od.set_up()
     right_knee_pitch_od.set_up()
 
     # robot = Robot()
     # robot.setup()
 
     # Move right knee
-    # print(f"Initial Left knee: {left_knee_pitch_joint.get_position()} rad")
-    # print(f"Initial Right knee: {left_knee_pitch_joint.get_position()} rad")
-    print(f"Initial Left knee: {left_hip_pitch_joint.get_position()} rad")
-    print(f"Initial Right knee: {left_hip_pitch_joint.get_position()} rad")
+    print(f"Initial Right knee: {left_knee_pitch_joint.get_position()} rad")
     print()
 
-    print("Moving joint...")
-    # left_knee_pitch_joint.move(-1.0)
-    # right_knee_pitch_joint.move(1.0)
-    left_hip_pitch_joint.move(1.0)
-    right_hip_pitch_joint.move(-0.8)
+    knee_control = SimpleTorqueController
+    desiredPos = 30
+    desiredVec = 10
+
+    print("Moving knee joint by torque control...")
+    right_knee_pitch_joint.move(knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
+                                                                      desiredPos,
+                                                                      right_knee_pitch_joint.get_velocity(),
+                                                                      desiredVec))
 
     start_time = time.time()
 
     while time.time() - start_time < 4:  # seconds
-        # lpos = math.degrees(left_knee_pitch_joint.get_position())
-        # lvel = math.degrees(left_knee_pitch_joint.get_velocity())
-        # rpos = math.degrees(right_knee_pitch_joint.get_position())
-        # rvel = math.degrees(right_knee_pitch_joint.get_velocity())
-        lpos = math.degrees(left_hip_pitch_joint.get_position())
-        lvel = math.degrees(left_hip_pitch_joint.get_velocity())
-        rpos = math.degrees(right_hip_pitch_joint.get_position())
-        rvel = math.degrees(right_hip_pitch_joint.get_velocity())
-        print(f"lpos: {lpos} deg\tlvel: {lvel} deg/s\trpos: {rpos} deg\trvel: {rvel} deg/s")
+        rpos = math.degrees(right_knee_pitch_joint.get_position())
+        rvel = math.degrees(right_knee_pitch_joint.get_velocity())
+        print(f"[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
 
     print("Stopping joints...")
     # left_knee_pitch_joint.stop()
-    # right_knee_pitch_joint.stop()
-    left_hip_pitch_joint.stop()
-    right_hip_pitch_joint.stop()
+    right_knee_pitch_joint.stop()
+    # left_hip_pitch_joint.stop()
+    # right_hip_pitch_joint.stop()
 
-    start_time = time.time()
-    while time.time() - start_time < 5:  # seconds
-        # lpos = math.degrees(left_knee_pitch_joint.get_position())
-        # lvel = math.degrees(left_knee_pitch_joint.get_velocity())
-        # rpos = math.degrees(right_knee_pitch_joint.get_position())
-        # rvel = math.degrees(right_knee_pitch_joint.get_velocity())
-        lpos = math.degrees(left_hip_pitch_joint.get_position())
-        lvel = math.degrees(left_hip_pitch_joint.get_velocity())
-        rpos = math.degrees(right_hip_pitch_joint.get_position())
-        rvel = math.degrees(right_hip_pitch_joint.get_velocity())
-        print(f"lpos: {lpos} deg\tlvel: {lvel} deg/s\trpos: {rpos} deg\trvel: {rvel} deg/s")
+    while time.time() - start_time < 1:  # seconds
+        rpos = math.degrees(right_knee_pitch_joint.get_position())
+        rvel = math.degrees(right_knee_pitch_joint.get_velocity())
+        print(f"[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
 
     print("Terminating joint...")
-    left_hip_pitch_od.terminate()
-    left_knee_pitch_od.terminate()
-    right_hip_pitch_od.terminate()
+    # left_hip_pitch_od.terminate()
+    # left_knee_pitch_od.terminate()
+    # right_hip_pitch_od.terminate()
     right_knee_pitch_od.terminate()
 
     framework.loop()

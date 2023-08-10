@@ -44,7 +44,6 @@ class TorqueMotor(Motor):
 
     def stop_motor(self) -> bool:
         print(f"Motor {self._odrive.can_id}: Stopped")
-        self._odrive.terminate()
         return self.move_motor(0)
 
     """
