@@ -137,9 +137,9 @@ if __name__ == '__main__':
     right_knee_pitch_od.terminate()
 
     pos_points.append(total_num)
-
-    plt.plot(time_points, pos_points)
-    plt.show()
+    #
+    # plt.plot(time_points, pos_points)
+    # plt.show()
     numpy.savetxt('test.out', pos_points, delimiter=',')
 
     framework.loop()
