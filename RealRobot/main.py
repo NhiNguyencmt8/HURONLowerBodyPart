@@ -9,7 +9,7 @@ from SimpleTorqueController import SimpleTorqueController
 import time
 import matplotlib.pyplot as plt
 import math
-
+import numpy
 if __name__ == '__main__':
     # Parameters
     velocity_limit = 15.0
@@ -135,6 +135,7 @@ if __name__ == '__main__':
 
     plt.plot(time_points, pos_points)
     plt.show()
+    numpy.savetxt('test.out', pos_points, delimiter=',')
 
     framework.loop()
 
