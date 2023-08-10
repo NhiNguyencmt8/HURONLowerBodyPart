@@ -102,7 +102,7 @@ if __name__ == '__main__':
     pos_points = []
     total_num = 0
 
-    while time.time() - start_time < 4:  # seconds
+    while time.time() - start_time < 10:  # seconds
         total_num += 1
         time_points = time.time()
         pos_points.append(right_knee_pitch_joint.get_position())
