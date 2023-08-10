@@ -9,7 +9,6 @@ from SimpleTorqueController import SimpleTorqueController
 import time
 import math
 
-
 if __name__ == '__main__':
     # Parameters
     velocity_limit = 15.0
@@ -97,17 +96,23 @@ if __name__ == '__main__':
     desiredVec = 10
 
     print("Moving knee joint by torque control...")
-    right_knee_pitch_joint.move(knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
-                                                                      desiredPos,
-                                                                      right_knee_pitch_joint.get_velocity(),
-                                                                      desiredVec))
+    # right_knee_pitch_joint.move(knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
+    #                                                                   desiredPos,
+    #                                                                   right_knee_pitch_joint.get_velocity(),
+    #
 
     start_time = time.time()
 
     while time.time() - start_time < 4:  # seconds
-        rpos = math.degrees(right_knee_pitch_joint.get_position())
-        rvel = math.degrees(right_knee_pitch_joint.get_velocity())
-        print(f"[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
+
+        torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
+                                                       desiredPos,
+                                                       right_knee_pitch_joint.get_velocity(),
+                                                       desiredVec)
+        print(torque)
+        # rpos = math.degrees(right_knee_pitch_joint.get_position())
+        # rvel = math.degrees(right_knee_pitch_joint.get_velocity())
+        # print(f"[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
 
     print("Stopping joints...")
     # left_knee_pitch_joint.stop()
