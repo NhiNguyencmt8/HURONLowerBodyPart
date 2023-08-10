@@ -91,7 +91,7 @@ if __name__ == '__main__':
     print(f"Initial Right knee: {left_knee_pitch_joint.get_position()} rad")
     print()
 
-    knee_control = SimpleTorqueController
+    knee_control = SimpleTorqueController()
     desiredPos = 30
     desiredVec = 10
 
@@ -106,8 +106,8 @@ if __name__ == '__main__':
     while time.time() - start_time < 4:  # seconds
 
         torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
-                                                       desiredPos,
                                                        right_knee_pitch_joint.get_velocity(),
+                                                       desiredPos,
                                                        desiredVec)
         print(torque)
         # rpos = math.degrees(right_knee_pitch_joint.get_position())
