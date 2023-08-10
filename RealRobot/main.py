@@ -105,7 +105,7 @@ if __name__ == '__main__':
 
     while time.time() - start_time < 4:  # seconds
 
-        torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
+        torque = knee_control.torque_linear_controller(10,
                                                        right_knee_pitch_joint.get_velocity(),
                                                        desiredPos,
                                                        desiredVel)
