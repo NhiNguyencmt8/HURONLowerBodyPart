@@ -7,7 +7,8 @@ from TorqueMotor import TorqueMotor
 from HURONEncoder import HURONEncoder
 from SimpleTorqueController import SimpleTorqueController
 import time
-import math
+import mathimport matplotlib.pyplot as plt
+import numpy as np
 
 if __name__ == '__main__':
     # Parameters
@@ -100,7 +101,8 @@ if __name__ == '__main__':
     start_time = time.time()
 
     while time.time() - start_time < 10:  # seconds
-
+        time_points = time.time()
+        pos_points = right_knee_pitch_joint.get_position()
         torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
                                                        right_knee_pitch_joint.get_velocity(),
                                                        desiredPos,
@@ -130,6 +132,9 @@ if __name__ == '__main__':
     left_knee_pitch_od.terminate()
     # right_hip_pitch_od.terminate()
     right_knee_pitch_od.terminate()
+
+    plt.plot(time_points, pos_points)
+    plt.show()
 
     framework.loop()
 
