@@ -99,7 +99,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
 
-    while time.time() - start_time < 4:  # seconds
+    while time.time() - start_time < 10:  # seconds
 
         torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
                                                        right_knee_pitch_joint.get_velocity(),
@@ -127,7 +127,7 @@ if __name__ == '__main__':
     #     print(f"[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
 
     print("Moving back to 0 position...")
-    while time.time() - start_time < 4:  # seconds
+    while time.time() - start_time < 10:  # seconds
 
         torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
                                                        right_knee_pitch_joint.get_velocity(),
@@ -143,11 +143,20 @@ if __name__ == '__main__':
         rvel = math.degrees(right_knee_pitch_joint.get_velocity())
         print(f"\t[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
 
+    print("Stopping joints...")
+    # left_knee_pitch_joint.stop()
+    right_knee_pitch_joint.stop()
+    # left_hip_pitch_joint.stop()
+    # right_hip_pitch_joint.stop()
+
+
     print("Terminating joint...")
     # left_hip_pitch_od.terminate()
     # left_knee_pitch_od.terminate()
     # right_hip_pitch_od.terminate()
     right_knee_pitch_od.terminate()
+
+
 
     framework.loop()
 
