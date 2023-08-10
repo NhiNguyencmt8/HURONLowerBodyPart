@@ -10,7 +10,7 @@ class SimpleTorqueController:
         self.B = [[0], [1 / (self.m * (self.length ** 2))]]
         self.C = [[1, 0], [0, 1]]
         self.D = [[0], [0]]
-        self.poles = [-5, -10]
+        self.poles = [-6, -11]
 
     def torque_linear_controller(self, currentPos, currentVec, desiredPos, desiredVec):
         K = control.place(self.A, self.B, self.poles)

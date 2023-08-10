@@ -109,7 +109,7 @@ if __name__ == '__main__':
             print("Torque is too large, resetting torque")
             torque = 0
         # torque = torque.astype(float)
-        # right_knee_pitch_joint.move(torque[0][0])
+        right_knee_pitch_joint.move(torque[0][0])
         print(f"\t[Torque]: trpos: {torque}")
         rpos = math.degrees(right_knee_pitch_joint.get_position())
         rvel = math.degrees(right_knee_pitch_joint.get_velocity())
