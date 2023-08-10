@@ -4,7 +4,7 @@ import control
 class SimpleTorqueController:
     def __init__(self):
         self.m = 7.57
-        self.length = 41.86
+        self.length = 0.4186
         self.g = 9.8
         self.A = [[0, 1], [self.g / self.length, 0]]
         self.B = [[0], [1 / (self.m * (self.length ** 2))]]
