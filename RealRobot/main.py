@@ -111,8 +111,8 @@ if __name__ == '__main__':
                                                        desiredVel)
         if abs(torque) > 1.5:
             torque = 0
-        torque = torque.astype(float)
-        right_knee_pitch_joint.move(torque)
+        # torque = torque.astype(float)
+        right_knee_pitch_joint.move(torque[0][0])
         print(torque)
         rpos = math.degrees(right_knee_pitch_joint.get_position())
         rvel = math.degrees(right_knee_pitch_joint.get_velocity())
