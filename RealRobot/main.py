@@ -126,6 +126,9 @@ if __name__ == '__main__':
     #     rvel = math.degrees(right_knee_pitch_joint.get_velocity())
     #     print(f"[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
 
+    print("Moving back to 0 position...")
+    right_knee_pitch_joint.move(0)
+
     print("Terminating joint...")
     # left_hip_pitch_od.terminate()
     # left_knee_pitch_od.terminate()
