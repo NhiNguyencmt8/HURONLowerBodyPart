@@ -99,10 +99,12 @@ if __name__ == '__main__':
     #
 
     start_time = time.time()
+    pos_points = []
+    total_num = 0
 
-    while time.time() - start_time < 10:  # seconds
+    while time.time() - start_time < 4:  # seconds
+        total_num += 1
         time_points = time.time()
-        pos_points = []
         pos_points.append(right_knee_pitch_joint.get_position())
         torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
                                                        right_knee_pitch_joint.get_velocity(),
@@ -133,6 +135,8 @@ if __name__ == '__main__':
     left_knee_pitch_od.terminate()
     # right_hip_pitch_od.terminate()
     right_knee_pitch_od.terminate()
+
+    pos_points.append(total_num)
 
     plt.plot(time_points, pos_points)
     plt.show()
