@@ -71,7 +71,7 @@ if __name__ == '__main__':
 
     # Calibrate ODrives
     print("Calibrating...")
-    # left_hip_pitch_od.calibrate()
+    left_hip_pitch_od.calibrate()
     # right_hip_pitch_od.calibrate()
     # time.sleep(25)
     right_knee_pitch_od.calibrate()
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
     print("Setting up...")
     # left_hip_pitch_od.set_up()
-    # left_knee_pitch_od.set_up()
+    left_knee_pitch_od.set_up()
     # right_hip_pitch_od.set_up()
     right_knee_pitch_od.set_up()
 
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     # robot.setup()
 
     knee_control = SimpleTorqueController()
-    desiredPos = math.radians(60)
+    desiredPos = math.radians(20)
     desiredVel = 0
 
     print("Moving knee joint by torque control...")
@@ -110,25 +110,26 @@ if __name__ == '__main__':
             torque = 0
         # torque = torque.astype(float)
         right_knee_pitch_joint.move(torque[0][0])
+        left_knee_pitch_joint.move(-torque[0][0])
         print(f"\t[Torque]: trpos: {torque}")
         rpos = math.degrees(right_knee_pitch_joint.get_position())
         rvel = math.degrees(right_knee_pitch_joint.get_velocity())
+        lpos = math.degrees(left_knee_pitch_joint.get_position())
+        lvel = math.degrees(left_knee_pitch_joint.get_velocity())
         print(f"\t[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
+        print(f"\t[Left knee]: trpos: {lpos} deg\trvel: {lvel} deg/s")
 
     print("Stopping joints...")
-    # left_knee_pitch_joint.stop()
+    left_knee_pitch_joint.stop()
     right_knee_pitch_joint.stop()
     # left_hip_pitch_joint.stop()
     # right_hip_pitch_joint.stop()
 
-
     print("Terminating joint...")
     # left_hip_pitch_od.terminate()
-    # left_knee_pitch_od.terminate()
+    left_knee_pitch_od.terminate()
     # right_hip_pitch_od.terminate()
     right_knee_pitch_od.terminate()
-
-
 
     framework.loop()
 
