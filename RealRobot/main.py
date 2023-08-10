@@ -88,7 +88,7 @@ if __name__ == '__main__':
     # robot.setup()
 
     knee_control = SimpleTorqueController()
-    desiredPos = math.radians(10)
+    desiredPos = math.radians(20)
     desiredVel = 0
 
     print("Moving knee joint by torque control...")
