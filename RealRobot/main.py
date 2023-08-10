@@ -87,10 +87,6 @@ if __name__ == '__main__':
     # robot = Robot()
     # robot.setup()
 
-    # Move right knee
-    print(f"Initial Right knee: {left_knee_pitch_joint.get_position()} rad")
-    print()
-
     knee_control = SimpleTorqueController()
     desiredPos = math.radians(10)
     desiredVel = 0
@@ -110,10 +106,11 @@ if __name__ == '__main__':
                                                        desiredPos,
                                                        desiredVel)
         if abs(torque) > 1.5:
+            print("Torque is too large, resetting torque")
             torque = 0
         # torque = torque.astype(float)
-        right_knee_pitch_joint.move(torque[0][0])
-        print(torque)
+        # right_knee_pitch_joint.move(torque[0][0])
+        print(f"\t[Torque]: trpos: {torque}")
         rpos = math.degrees(right_knee_pitch_joint.get_position())
         rvel = math.degrees(right_knee_pitch_joint.get_velocity())
         print(f"\t[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
