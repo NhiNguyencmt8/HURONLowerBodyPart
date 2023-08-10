@@ -88,7 +88,7 @@ if __name__ == '__main__':
     # robot.setup()
 
     knee_control = SimpleTorqueController()
-    desiredPos = math.radians(20)
+    desiredPos = math.radians(60)
     desiredVel = 0
 
     print("Moving knee joint by torque control...")
@@ -104,34 +104,6 @@ if __name__ == '__main__':
         torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
                                                        right_knee_pitch_joint.get_velocity(),
                                                        desiredPos,
-                                                       desiredVel)
-        if abs(torque) > 1.5:
-            print("Torque is too large, resetting torque")
-            torque = 0
-        # torque = torque.astype(float)
-        right_knee_pitch_joint.move(torque[0][0])
-        print(f"\t[Torque]: trpos: {torque}")
-        rpos = math.degrees(right_knee_pitch_joint.get_position())
-        rvel = math.degrees(right_knee_pitch_joint.get_velocity())
-        print(f"\t[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
-
-    print("Stopping joints...")
-    # left_knee_pitch_joint.stop()
-    right_knee_pitch_joint.stop()
-    # left_hip_pitch_joint.stop()
-    # right_hip_pitch_joint.stop()
-
-    # while time.time() - start_time < 1:  # seconds
-    #     rpos = math.degrees(right_knee_pitch_joint.get_position())
-    #     rvel = math.degrees(right_knee_pitch_joint.get_velocity())
-    #     print(f"[Right knee]: trpos: {rpos} deg\trvel: {rvel} deg/s")
-
-    print("Moving back to 0 position...")
-    while time.time() - start_time < 10:  # seconds
-
-        torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
-                                                       right_knee_pitch_joint.get_velocity(),
-                                                       0,
                                                        desiredVel)
         if abs(torque) > 1.5:
             print("Torque is too large, resetting torque")
