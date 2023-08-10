@@ -8,6 +8,7 @@ from HURONEncoder import HURONEncoder
 from SimpleTorqueController import SimpleTorqueController
 import time
 import matplotlib.pyplot as plt
+import math
 
 if __name__ == '__main__':
     # Parameters
