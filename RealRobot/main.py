@@ -102,7 +102,8 @@ if __name__ == '__main__':
 
     while time.time() - start_time < 10:  # seconds
         time_points = time.time()
-        pos_points = right_knee_pitch_joint.get_position()
+        pos_points = []
+        pos_points.append(right_knee_pitch_joint.get_position())
         torque = knee_control.torque_linear_controller(right_knee_pitch_joint.get_position(),
                                                        right_knee_pitch_joint.get_velocity(),
                                                        desiredPos,
