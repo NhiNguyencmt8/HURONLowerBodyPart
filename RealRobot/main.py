@@ -109,6 +109,8 @@ if __name__ == '__main__':
                                                        right_knee_pitch_joint.get_velocity(),
                                                        desiredPos,
                                                        desiredVel)
+        if math.abs(torque) > 1.5:
+            torque = 0
         right_knee_pitch_joint.move(torque)
         print(torque)
         rpos = math.degrees(right_knee_pitch_joint.get_position())
