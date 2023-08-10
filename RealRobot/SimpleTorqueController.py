@@ -15,4 +15,4 @@ class SimpleTorqueController:
     def torque_linear_controller(self, currentPos, currentVec, desiredPos, desiredVec):
         K = control.place(self.A, self.B, self.poles)
         thetaMatrix = [[currentPos - desiredPos], [currentVec - desiredVec]]
-        return -K * thetaMatrix
+        return -K @ thetaMatrix
