@@ -7,8 +7,7 @@ from TorqueMotor import TorqueMotor
 from HURONEncoder import HURONEncoder
 from SimpleTorqueController import SimpleTorqueController
 import time
-import mathimport matplotlib.pyplot as plt
-import numpy as np
+import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     # Parameters
