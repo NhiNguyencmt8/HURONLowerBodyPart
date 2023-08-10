@@ -71,11 +71,11 @@ if __name__ == '__main__':
 
     # Calibrate ODrives
     print("Calibrating...")
-    left_hip_pitch_od.calibrate()
+    # left_hip_pitch_od.calibrate()
     # right_hip_pitch_od.calibrate()
     # time.sleep(25)
     right_knee_pitch_od.calibrate()
-    # left_knee_pitch_od.calibrate()
+    left_knee_pitch_od.calibrate()
     time.sleep(25)
 
     print("Setting up...")
